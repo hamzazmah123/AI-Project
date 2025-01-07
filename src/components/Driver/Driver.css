@@ -1,0 +1,62 @@
+.trip-details {
+    text-align: center;
+    margin: 2rem;
+  }
+  
+  .trip-details-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .trip-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  .trip-card h3 {
+    margin-top: 0;
+    color: #007bff;
+  }
+  
+  .trip-card p {
+    margin: 0.5rem 0;
+  }  
+
+  .driver-dashboard h2, .driver-dashboard p {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .dashboard {
+    text-align: center;
+    margin: 2rem;
+  }
+  
+  .dashboard-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .dashboard-link {
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dashboard-link:hover {
+    background-color: #0056b3;
+  }  
