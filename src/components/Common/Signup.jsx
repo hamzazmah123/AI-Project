@@ -1,16 +1,23 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./Auth.css";
 
 function Signup() {
   const [userDetails, setUserDetails] = useState({
-    username: "",
+    name: "",
+    email: "",
     password: "",
     role: "student",
   });
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    alert("Signup successful! (For now, this is just a placeholder.)");
+    try {
+      const response = await axios.post("http://localhost:5000/api/auth/signup", userDetails);
+      alert(response.data.message);
+    } catch (err) {
+      alert(err.response?.data?.message || "An error occurred during signup.");
+    }
   };
 
   return (
@@ -18,13 +25,20 @@ function Signup() {
       <h2>Signup</h2>
       <form onSubmit={handleSignup}>
         <label>
-          Username:
+          Name:
           <input
             type="text"
-            value={userDetails.username}
-            onChange={(e) =>
-              setUserDetails({ ...userDetails, username: e.target.value })
-            }
+            value={userDetails.name}
+            onChange={(e) => setUserDetails({ ...userDetails, name: e.target.value })}
+            required
+          />
+        </label>
+        <label>
+          Email:
+          <input
+            type="email"
+            value={userDetails.email}
+            onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })}
             required
           />
         </label>
@@ -33,9 +47,7 @@ function Signup() {
           <input
             type="password"
             value={userDetails.password}
-            onChange={(e) =>
-              setUserDetails({ ...userDetails, password: e.target.value })
-            }
+            onChange={(e) => setUserDetails({ ...userDetails, password: e.target.value })}
             required
           />
         </label>
@@ -43,9 +55,7 @@ function Signup() {
           Signup as:
           <select
             value={userDetails.role}
-            onChange={(e) =>
-              setUserDetails({ ...userDetails, role: e.target.value })
-            }
+            onChange={(e) => setUserDetails({ ...userDetails, role: e.target.value })}
           >
             <option value="student">Student</option>
             <option value="admin">Admin</option>
