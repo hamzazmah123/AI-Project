@@ -13,7 +13,7 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/signup", userDetails);
+      const response = await axios.post("http://localhost:5000/auth/signup", userDetails);
       alert(response.data.message);
     } catch (err) {
       alert(err.response?.data?.message || "An error occurred during signup.");
