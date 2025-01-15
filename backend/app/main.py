@@ -7,7 +7,7 @@ from routes.fee_routes import fee_routes
 from routes.auth_routes import auth_routes
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 # Register routes
 app.register_blueprint(vehicle_routes, url_prefix="/vehicles")

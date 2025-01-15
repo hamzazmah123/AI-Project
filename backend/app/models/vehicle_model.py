@@ -3,6 +3,7 @@
 
 
 from pymongo import MongoClient
+from bson import ObjectId
 
 class VehicleModel:
     def __init__(self, db):
@@ -12,8 +13,10 @@ class VehicleModel:
         self.collection.insert_one(vehicle_data)
 
     def get_all_vehicles(self):
-        return list(self.collection.find())
-
+        vehicles = self.collection.find()
+        return [
+            {**vehicle, "_id": str(vehicle["_id"])} for vehicle in vehicles
+        ]
     def update_vehicle(self, vehicle_id, update_data):
         self.collection.update_one({"_id": vehicle_id}, {"$set": update_data})
 
