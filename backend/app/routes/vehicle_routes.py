@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from models.vehicle_model import VehicleModel
 from database import db
+from bson import ObjectId
 
 vehicle_routes = Blueprint("vehicle_routes", __name__)
 vehicle_model = VehicleModel(db)
@@ -11,7 +12,7 @@ def add_vehicle():
     vehicle_model.add_vehicle(data)
     return jsonify({"message": "Vehicle added successfully!"}), 201
 
-@vehicle_routes.route("/vehicles", methods=["GET"])
+@vehicle_routes.route("/", methods=["GET"])
 def get_vehicles():
     vehicles = vehicle_model.get_all_vehicles()
     return jsonify(vehicles), 200

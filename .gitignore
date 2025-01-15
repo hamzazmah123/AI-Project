@@ -4,6 +4,11 @@
 /node_modules
 /.pnp
 .pnp.js
+/backend/venv
+/backend/app/__pycache__
+/backend/app/ai/__pycache__
+/backend/app/models/__pycache__
+/backend/app/routes/__pycache__
 
 # testing
 /coverage

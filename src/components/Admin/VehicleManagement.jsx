@@ -17,7 +17,7 @@ function VehicleManagement() {
   // Fetch vehicles from backend
   const fetchVehicles = async () => {
     try {
-      const { data } = await axios.get(`${baseURL}/vehicles`);
+      const { data } = await axios.get(baseURL);
       setVehicles(data);
     } catch (error) {
       console.error("Error fetching vehicles:", error);
@@ -28,7 +28,7 @@ function VehicleManagement() {
   const handleAddVehicle = async () => {
     if (newVehicle.name && newVehicle.type && newVehicle.capacity) {
       try {
-        await axios.post(`${baseURL}/vehicles`, newVehicle);
+        await axios.post(baseURL, newVehicle);
         setNewVehicle({ name: "", type: "", capacity: "" });
         fetchVehicles(); // Refresh the list after adding a vehicle
       } catch (error) {
