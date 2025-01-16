@@ -28,7 +28,8 @@ function VehicleManagement() {
   const handleAddVehicle = async () => {
     if (newVehicle.name && newVehicle.type && newVehicle.capacity) {
       try {
-        await axios.post(baseURL, newVehicle);
+        await axios.post(`${baseURL}/vehicles`, newVehicle);
+        // await axios.post(baseURL, newVehicle);
         setNewVehicle({ name: "", type: "", capacity: "" });
         fetchVehicles(); // Refresh the list after adding a vehicle
       } catch (error) {
