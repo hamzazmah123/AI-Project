@@ -1,10 +1,4 @@
-
-
-
-
-
 // ver 2 running but only posting
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Admin.css";

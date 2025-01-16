@@ -11,6 +11,7 @@ function Dashboard() {
         <Link to="/admin/vehicle-management" className="dashboard-link">Vehicle Management</Link>
         <Link to="/admin/route-management" className="dashboard-link">Route Management</Link>
         <Link to="/admin/fee-management" className="dashboard-link">Fee Management</Link>
+        <Link to="/admin/driver-assign" className="dashboard-link">Driver Assignment</Link>
       </div>
     </div>
   );

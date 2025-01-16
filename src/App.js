@@ -1,28 +1,4 @@
-// import React from "react";
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import AdminPage from "./pages/AdminPage";
-// import StudentPage from "./pages/StudentPage";
-// import DriverPage from "./pages/DriverPage";
-// import HomePage from "./pages/HomePage";
-// import Navbar from "./components/Common/Navbar.jsx";
-// import Footer from "./components/Common/Footer.jsx";
 
-// function App() {
-//   return (
-//     <Router>
-//       <Navbar />
-//       <Routes>
-//         <Route path="/" element={<HomePage />} />
-//         <Route path="/admin/*" element={<AdminPage />} /> {/* Note the '/*' for nested routes */}
-//         <Route path="/student/*" element={<StudentPage />} />
-//         <Route path="/driver/*" element={<DriverPage />} />
-//       </Routes>
-//       <Footer />
-//     </Router>
-//   );
-// }
-
-// export default App;
 
 
 import React from "react";
@@ -33,6 +9,7 @@ import AdminDashboard from "./components/Admin/Dashboard";
 import VehicleManagement from "./components/Admin/VehicleManagement";
 import RouteManagement from "./components/Admin/RouteManagement";
 import FeeManagement from "./components/Admin/FeeManagement";
+import DriverAssign from "./components/Admin/DriverAssign";
 import StudentDashboard from "./components/Student/Dashboard";
 import StudentProfile from "./components/Student/Profile";
 import StudentSignup from "./components/Student/SignUp";
@@ -54,6 +31,7 @@ function App() {
         <Route path="/admin/vehicle-management" element={<VehicleManagement />} />
         <Route path="/admin/route-management" element={<RouteManagement />} />
         <Route path="/admin/fee-management" element={<FeeManagement />} />
+        <Route path="/admin/driver-assign" element={<DriverAssign />} />
 
         {/* Student Routes */}
         <Route path="/student/dashboard" element={<StudentDashboard />} />

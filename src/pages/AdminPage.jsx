@@ -4,6 +4,7 @@ import Dashboard from "../components/Admin/Dashboard";
 import VehicleManagement from "../components/Admin/VehicleManagement";
 import RouteManagement from "../components/Admin/RouteManagement";
 import FeeManagement from "../components/Admin/FeeManagement";
+import DriverAssign from "./components/Admin/DriverAssign";
 import "../components/Admin/Admin.css";
 
 function AdminPage() {
@@ -16,6 +17,7 @@ function AdminPage() {
         <Route path="/vehicle-management" element={<VehicleManagement />} />
         <Route path="/route-management" element={<RouteManagement />} />
         <Route path="/fee-management" element={<FeeManagement />} />
+        <Route path="/driver-assign" element={<DriverAssign />} />
       </Routes>
     </div>
   );
