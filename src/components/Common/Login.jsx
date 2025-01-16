@@ -20,6 +20,7 @@ function Login() {
   };
 
   return (
+    <div className="login-body">
     <div className="auth-container">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
@@ -46,6 +47,7 @@ function Login() {
       <p>
         Don't have an account? <a href="/signup">Sign Up</a>
       </p>
+    </div>
     </div>
   );
 }

@@ -1,4 +1,116 @@
-/* Auth.css */
+/* General Styles */
+.login-body,.signup-body {
+  font-family: 'Trebuchet MS';
+  margin: 0;
+  padding: 0;
+  background-color: #a0ccc1; /* Dark green background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+/* Auth Container */
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  padding-right: 45px;
+  /* margin-right: 10rem; */
+  background-color: #e9e7e2; /* Beige color */
+  border-radius: 16px; /* Rounded corners */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Heading */
+.auth-container h2 {
+  margin-bottom: 1.5rem;
+  color: #f6c305; /* Yellow for headings */
+  font-size: 1.8rem;
+}
+
+.signuprole {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #fdfdfd;
+}
+
+
+/* Labels */
+.auth-container label {
+  display: block;
+  text-align: left;
+  margin: 0.5rem 0 0.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Inputs */
+.auth-container input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  background-color: #fdfdfd;
+}
+
+.auth-container input:focus {
+  outline: none;
+  border-color: #2b4a42; /* Focus color */
+  box-shadow: 0 0 5px rgba(43, 74, 66, 0.4);
+}
+
+/* Buttons */
+.auth-container button {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+  background-color: #f6c305; /* Yellow */
+  color: #2b4a42; /* Dark green */
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-container button:hover {
+  background-color: #f4b802;
+}
+
+/* Links */
+.auth-container p {
+  margin-top: 1rem;
+  color: #555;
+}
+
+.auth-container a {
+  color: #2b4a42;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+  .auth-container {
+    padding: 1.5rem;
+  }
+
+  .auth-container h2 {
+    font-size: 1.5rem;
+  }
+}
+
+
+
+
+/* Auth.css
 .auth-container {
     width: 100%;
     max-width: 400px;
@@ -55,4 +167,4 @@
   .auth-container a {
     color: #007bff;
     text-decoration: none;
-  }  
+  }   */
