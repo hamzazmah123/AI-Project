@@ -13,7 +13,9 @@ class VehicleModel:
         self.collection.insert_one(vehicle_data)
 
     def get_all_vehicles(self):
-        vehicles = self.collection.find()
+        vehicles = self.collection.find(
+            {"assigned": {"$exists": False}}
+        )
         return [
             {**vehicle, "_id": str(vehicle["_id"])} for vehicle in vehicles
         ]

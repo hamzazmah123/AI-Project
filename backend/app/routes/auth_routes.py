@@ -1,6 +1,8 @@
 from flask import Blueprint, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from database import db
+from flask import Response
+from bson.objectid import ObjectId
 
 auth_routes = Blueprint("auth_routes", __name__)
 
@@ -45,12 +47,68 @@ def get_drivers():
         print("Error fetching drivers:", e)
         return jsonify({"message": "Failed to fetch drivers"}), 500
 
+@auth_routes.route("/drivers/unassigned", methods=["GET"])
+def get_unassigned_drivers():
+    try:
+        # Fetch all users with the role "driver"
+        drivers = list(
+            db.users.find(
+                {"role": "driver", "assigned": {"$exists": False}},  # Filter
+                {"_id": 1, "name": 1, "email": 1}                    # Projection
+            )
+        )        # Convert ObjectId to string
+        for driver in drivers:
+            driver["_id"] = str(driver["_id"])
+        return jsonify(drivers), 200
+    except Exception as e:
+        print("Error fetching drivers junaid:", e)
+        return jsonify({"message": "Failed to fetch drivers"}), 500
+
     
-@auth_routes.route("/assign-driver", methods=["POST"])
+# @auth_routes.route("/assignments", methods=["POST"])
+# def assign_driver():
+#     data = request.json
+#     db.users.insert_one(data)
+#     return jsonify({"message": "Driver assigned successfully!"}), 201
+
+@auth_routes.route("/assignments", methods=["POST"])
 def assign_driver():
+
     data = request.json
-    db.assignments.insert_one(data)
-    return jsonify({"message": "Driver assigned successfully!"}), 201
+    driver_name = data.get("name")  # Assume `email` is a unique identifier for the driver
+    db.users.update_one(
+        {"name": driver_name},
+        {"$set": {
+            "vehicleId": data["vehicle_id"],
+            "assigned": True
+        }}
+    )
+
+    return jsonify({"message": "Driver assignment updated successfully!"}), 200
+
+@auth_routes.route("/vehicle-assignments", methods=["POST"])
+def assign_vehicle():
+
+    data = request.json
+
+    db.vehicles.update_one(
+        {"_id": ObjectId(data["vehicle_id"])},
+        {"$set": {
+            "assigned": True
+        }}
+    )
+    return jsonify({"message": "Vehicle assignment updated successfully!"}), 200
+
+@auth_routes.route('/students', methods=['POST'])
+def save_student():
+    data = request.json
+    db.students.insert_one(data)
+    return jsonify({"message": "Student saved successfully"})
+
+# @auth_routes.route("/assignments", methods=["GET"])
+# def get_assignments():
+#     assignments = assignment_model.get_all_assignments()
+#     return jsonify(assignments), 200
 
 
 try:

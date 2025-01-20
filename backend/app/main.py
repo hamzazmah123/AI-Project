@@ -5,9 +5,11 @@ from routes.driver_routes import driver_routes
 from routes.route_routes import route_routes
 from routes.fee_routes import fee_routes
 from routes.auth_routes import auth_routes
+from routes.assignment_routes import assignment_routes
+
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}}, supports_credentials=True)
 
 # Register routes
 app.register_blueprint(vehicle_routes, url_prefix="/vehicles")

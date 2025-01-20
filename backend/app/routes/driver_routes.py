@@ -29,6 +29,10 @@ def assign_driver():
     return jsonify({"message": "Driver assigned successfully!"}), 200
 
 
+@driver_routes.route("/drivers/unassigned", methods=["GET"])
+def get_unassigned_drivers():
+    drivers = driver_model.get_unassigned_drivers()
+    return jsonify(drivers), 200
 
 # from flask import Blueprint, request, jsonify
 # from models.driver_model import DriverModel

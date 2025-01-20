@@ -1,16 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Admin.css";
+import axios from "axios";
 
 function RouteManagement() {
   const [routes, setRoutes] = useState([]);
-  const [newRoute, setNewRoute] = useState({ start: "", end: "", distance: "" });
+  const [newRoute, setNewRoute] = useState({
+    start: "",
+    end: "",
+    distance: "",
+    fare: "",
+  });
+  const baseURL = "http://localhost:5000/routes";
 
-  const handleAddRoute = () => {
-    if (newRoute.start && newRoute.end && newRoute.distance) {
-      setRoutes([...routes, newRoute]);
-      setNewRoute({ start: "", end: "", distance: "" });
+  const fetchRoutes = async () => {
+    try {
+      const { data } = await axios.get(baseURL);
+      setRoutes(data);
+    } catch (error) {
+      console.error("Error fetching vehicles:", error);
     }
   };
+
+  const handleAddRoute = async () => {
+    if (newRoute.start && newRoute.end) {
+      try {
+        await axios.post(`${baseURL}/routes`, newRoute);
+        // await axios.post(baseURL, newVehicle);
+        setNewRoute({ start: "", end: "", fare: "", origin : '', destination: '' });
+        fetchRoutes();
+      } catch (error) {
+        console.error("Error adding routes:", error);
+      }
+    } else {
+      alert("Please fill out all fields.");
+    }
+  };
+
+  // Fetch vehicles on component mount
+  useEffect(() => {
+    fetchRoutes();
+  }, []);
 
   return (
     <div className="admin-section">
@@ -29,10 +58,22 @@ function RouteManagement() {
           onChange={(e) => setNewRoute({ ...newRoute, end: e.target.value })}
         />
         <input
+          type="text"
+          placeholder="Start Lat Long"
+          value={newRoute.origin}
+          onChange={(e) => setNewRoute({ ...newRoute, origin: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="End Lat Long"
+          value={newRoute.destination}
+          onChange={(e) => setNewRoute({ ...newRoute, destination: e.target.value })}
+        />
+        <input
           type="number"
-          placeholder="Distance (km)"
-          value={newRoute.distance}
-          onChange={(e) => setNewRoute({ ...newRoute, distance: e.target.value })}
+          placeholder="Fare of route"
+          value={newRoute.fare}
+          onChange={(e) => setNewRoute({ ...newRoute, fare: e.target.value })}
         />
         <button onClick={handleAddRoute}>Add Route</button>
       </div>
