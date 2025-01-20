@@ -25,7 +25,7 @@ def get_distinct_routes():
     # distinct_start = db.routes.distinct("start")
     # distinct_end = db.routes.distinct("end")
     # return jsonify({"startLocations": distinct_start, "endLocations": distinct_end})
-    locations = db.routes.distinct("start") + db.routes.distinct("end")
+    locations = db.routes.distinct("start")
     return jsonify(list(set(locations)))
     
 # @route_routes.route('/filter', methods=['POST']) 

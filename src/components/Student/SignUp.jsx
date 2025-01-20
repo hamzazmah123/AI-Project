@@ -14,7 +14,7 @@ function SignUp() {
     universityID: "",
     pickDropTimings: "",
     startLocation: "",
-    endLocation: "",
+    endLocation: "IQRA Gulshan Campus", // Fixed default value
   });
 
   const [locations, setLocations] = useState([]); // To store distinct locations
@@ -57,17 +57,14 @@ function SignUp() {
       // Fetch routes based on selected start and end locations
       const { data } = await axios.post("http://localhost:5000/routes/filter", {
         start_location: formData.startLocation,
-        end_location: formData.endLocation,
+        end_location: formData.endLocation, // Ensure endLocation is included here
       });
 
-      // Check if routes are available
-      if (data.routes.length > 0) {
-        console.log('data: ', data);
+      // Check if routes exist and handle response
+      if (data && data.routes && data.routes.length > 0) {
         setRoutes(data.routes); // Set multiple route options (shortest + alternatives)
         setShowDialog(true); // Show the dialog with the route options
       } else {
-        console.log("data:in else ", data);
-
         setRoutes(["No route found"]);
         setShowDialog(true); // Show dialog indicating no route found
       }
@@ -84,7 +81,7 @@ function SignUp() {
         universityID: "",
         pickDropTimings: "",
         startLocation: "",
-        endLocation: "",
+        endLocation: "IQRA Gulshan Campus", // Reset to default fixed value
       });
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -172,45 +169,52 @@ function SignUp() {
           ))}
         </select>
 
-        <select
+        <input
+          type="text"
           name="endLocation"
           value={formData.endLocation}
-          onChange={handleChange}
-        >
-          <option value="">Select Destination</option>
-          {locations.map((location, index) => (
-            <option key={index} value={location}>
-              {location}
-            </option>
-          ))}
-        </select>
+          readOnly
+          placeholder="Destination"
+          className="fixed-end-location"
+        />
 
         <button type="submit">Sign Up</button>
       </form>
-
       {showDialog && (
         <div className="dialog-overlay">
           <div className="dialog">
-            <h3>Prediction Result</h3>
-            <p>
-              <strong>Routes:</strong>
-            </p>
             {routes.length > 0 ? (
-              routes.map((route, index) => (
-                <p key={index}>
-                  <strong>
-                    {index === 0
-                      ? "Shortest Route:"
-                      : `Alternative Route ${index + 1}:`}
-                  </strong>{" "}
-                  {route.path.join(" → ")} via [
-                  {route.via ? route.via : "No intermediate stops"}] (Distance:{" "}
-                  {route.distance} km)
+              <div>
+                <p>
+                  <strong>Routes:</strong>
                 </p>
-              ))
+                {routes.map((route, index) => (
+                  <div key={index}>
+                    <p>
+                      <strong>
+                        {index === 0
+                          ? "Shortest Route:"
+                          : `Alternative Route ${index + 1}:`}
+                      </strong>{" "}
+                      {route.path.join(" → ")} via [
+                      {route.via ? route.via : "No intermediate stops"}]
+                      (Distance: {route.distance} km)
+                    </p>
+                    <p>
+                      <strong>Single Trip Fee:</strong> {route.fee} (Rs)
+                    </p>
+                    <p>
+                      <strong>Monthly Fee:</strong> {route.fee * 20} (For 20
+                      days)
+                    </p>
+                  </div>
+                ))}
+              </div>
             ) : (
               <p>No routes found.</p>
             )}
+
+            <h3>Prediction Result</h3>
             <button onClick={() => setShowDialog(false)}>Close</button>
           </div>
         </div>
